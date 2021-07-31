@@ -1,0 +1,11 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+.navbar{
+    background-color: aquamarine;
+}
+
+a.navbar-item:hover{
+    color: beige;
+    background-color: rgb(70, 165, 133);
+    transition: background-color .7s;
+}
