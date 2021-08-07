@@ -12,6 +12,116 @@
 </head>
 <body>
    
+    <section class="section mt-5">
+        <div class="container">
+            <div class="columns is-multiline">
+                <div class="column is-3-widescreen is-4-desktop is-12-tablet is-offset-1-widescreen">
+                    <div class="box">
+                        <h2 class="is-title is-size-3 mb-6 has-text-weight-bold">Balance</h2>
+                        <div class="columns is-mobile is-vcentered">
+                            <div class="column is-size-5">Ganancias</div>
+                            <div class="column has-text-right has-text-success" id="earnings">+$0</div>
+                        </div>
+                        <div class="columns is-mobile is-vcentered">
+                            <div class="column is-size-5">Gastos</div>
+                            <div class="column has-text-right has-text-danger" id="expenses">-$0</div>
+                        </div>
+                        <div class="columns is-mobile is-vcentered">
+                            <div class="column is-size-4">Total</div>
+                            <div class="column has-text-right has-text-weight-bold" id="total-balance">$0</div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="columns is-mobile is-vcentered">
+                            <div class="column">
+                                <h3 class="is-size-4 has-text-weight-bold">Filtros</h3>
+                            </div>
+                            <div class="column has-text-right">
+                                <a href="#" id="toggle-filters">Ocultar filtros</a>
+                            </div>
+                        </div>
+                        <div id="filters">
+                            <div class="field">
+                                <label class="label" for="filter-type">Tipo</label>
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select id="filter-type">
+                                            <option value="every">Todas</option>
+                                            <option value="expense">Gasto</option>
+                                            <option value="profit">Ganancia</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="filter-category">Categoría</label>
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select class="filter-category categories-select" id="filter-category">
+                                            <option value="every">Todas</option>
+                                            <option value="">Comida</option>
+                                            <option value="">Servicios</option>
+                                            <option value="">Educación</option>
+                                            <option value="">Salidas</option>
+                                            <option value="">Transporte</option>
+                                            <option value="">Trabajo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="filter-date">Desde</label>
+                                <div class="control">
+                                    <div class="is-fullwidth">
+                                        <input class="input" type="date" id="filter-date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for=""></label>
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select id="filter-order">
+                                            <option value="more-recent">Más reciente</option>
+                                            <option value="less-recent">Menos reciente</option>
+                                            <option value="greater-amount">Mayor monto</option>
+                                            <option value="lower-amount">Menor monto</option>
+                                            <option value="A/Z">A/Z</option>
+                                            <option value="Z/A">Z/A</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-7-widescreen is-8-desktop">
+                    <div class="box operations-container">
+                        <div class="columns mb-4">
+                            <div class="column">
+                                <h3 class="is-size-4 has-text-weight-bold">Operaciones</h3>
+                            </div>
+                            <div class="column has-text-right-tablet">
+                                <button type="button" class="button is-primary" id="show-operation"> + Nueva operación</button>
+                            </div>
+                        </div>
+                        <div id="with-operations" class="is-hidden">
+                            <div class="columns has-text-weight-semibold is-hidden-mobile">
+                                <div class="column is-3">Descripción</div>
+                                <div class="column is-3">Categoría</div>
+                                <div class="column is-2 has-text-right">Fecha</div>
+                                <div class="column is-2 has-text-right">Monto</div>
+                                <div class="column is-2 has-text-right">Acciones</div>
+                            </div>
+                        </div>
+                        <div class="my-6 py-6" id="no-operations">
+                            <figure class="image"></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </section>
       
 </body>
 <script src="script.js"></script>
