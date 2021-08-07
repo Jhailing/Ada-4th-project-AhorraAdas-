@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AhorrAdas</title>
+    <link rel="shortcut icon" href="assets/barra-favicon.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/f52c88f85d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item has-text-white" href="">
+                    <h1 class="has-text-weight-bold is-size-4 ml-3 app-title"><i class="fas fa-hand-holding-usd"
+                            width="80" height="80" alt="Ahorradas" aria-hidden="true"></i> AhorrAdas</h1>
+                    <!-- <i class="fas fa-wallet" width="50" height="50"></i> -->
+                </a>
+
+                <a role="button" class="navbar-burger " aria-label="menu" aria-expanded="false"
+                    data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarBasicExample" class="navbar-menu is-align-content-space-evenly">
+                <div class="navbar-end">
+                    <a href="./index.html" class="navbar-item is-size-7 has-text-white">
+                        <i class="fas fa-chart-line mr-2" aria-hidden="true"></i> Balance
+                    </a>
+
+                    <a class="navbar-item is-size-7 has-text-white">
+                        <i class="fas fa-tag mr-2" aria-hidden="true"></i> Categoria
+                    </a>
+
+                    <a class="navbar-item is-size-7 has-text-white">
+                        <i class="fas fa-chart-pie mr-2" aria-hidden="true"></i> Reportes
+                    </a>
+                </div>
+            </div>
+
+        </nav>
+    </header>
+
+    <section class="section mt-5">
+        <div class="container">
+            <div class="columns is-multiline is-mobile">
+                <div class="column is-7-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
+                    <div class="box">
+                        <h2 class="title has-text-weight-bold">Categorías</h2>
+                        <label class="label mt-4" for="name-form-category">Nombre</label>
+                        <div class="field is-grouped">
+                            <div class="control is-expanded">
+                                <input class="input" type="text" placeholder="Agrega una categoría" id="category-input">
+                            </div>
+                            <div class="control">
+                                <button type="submit" class="button is-primary" id="category-button">
+                                    Agregar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mt-6" id="categories">
+                            <div class="mb-3">
+                                <div class="columns is-vcentered is-mobile">
+                                    <div class="column">
+                                        <span class="tag is primary is-ligth is-size-6">Servicios</span>
+                                    </div>
+                                    <div class="column is-narrow">
+                                        <a href="#" class="button is-light"><span class="icon is-medium">
+                                                <i class="far fa-edit"></i>
+                                            </span></a>
+
+                                        <a href="#" class=" button is-light"><span class="icon is-medium">
+                                                <i class="far fa-trash-alt"></i>
+                                            </span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="columns is-vcentered is-mobile mb-3">
+                                <div class="column">
+                                    <p class="todo-list">
+                                        <span class="tag is primary is-ligth is-size-6">Salidas</span>
+                                </div>
+                                <div class="column is-narrow">
+                                    <button class="button is-light"><span class="icon is-medium">
+                                            <i class="far fa-edit"></i>
+                                        </span></button>
+                                    <button class="button is-light"><span class="icon is-medium">
+                                            <i class="far fa-trash-alt"></i>
+                                        </span></button>
+                                </div>
+                            </div>
+
+                            <div class="columns is-vcentered is-mobile">
+                                <div class="column">
+                                    <p class="todo-list">
+                                        <span class="tag is primary is-ligth is-size-6">Educación</span>
+                                </div>
+                                <div class="column is-narrow">
+                                    <button class="button is-light"><span class="icon is-medium">
+                                            <i class="far fa-edit"></i>
+                                        </span></button>
+                                    <button class="button is-light"><span class="icon is-medium">
+                                            <i class="far fa-trash-alt"></i>
+                                        </span></button>
+                                </div>
+                            </div>
+
+                            <div class="columns is-vcentered is-mobile">
+                                <div class="column">
+                                    <p class="todo-list">
+                                        <span class="tag is primary is-ligth is-size-6">Transporte</span>
+                                </div>
+                                <div class="column is-narrow">
+                                    <button class="button is-light"><span class="icon is-medium">
+                                            <i class="far fa-edit"></i>
+                                        </span></button>
+                                    <button class="button is-light"><span class="icon is-medium">
+                                            <i class="far fa-trash-alt"></i>
+                                        </span></button>
+                                </div>
+                            </div>
+
+                            <div class="columns is-vcentered is-mobile">
+                                <div class="column">
+                                    <p class="todo-list">
+                                        <span class="tag is primary is-ligth is-size-6">Trabajo</span>
+                                </div>
+                                <div class="column is-narrow">
+                                    <button class="button is-light"> <span class="icon is-medium">
+                                            <i class="far fa-edit"></i>
+                                        </span></button>
+                                    <button class="button is-light"><span class="icon is-medium">
+                                            <i class="far fa-trash-alt"></i>
+                                        </span></button>
+                                </div>
+                            </div>
+
+                            <div class="columns is-vcentered is-mobile">
+                                <div class="column">
+                                    <p class="todo-list">
+                                        <span class="tag is primary is-ligth is-size-6">Comidas</span>
+                                </div>
+                                <div class="column is-narrow">
+                                    <button class="button is-light">
+                                        <span class="icon is-medium">
+                                            <i class="far fa-edit"></i>
+                                        </span>
+                                    </button>
+                                    <button class="button is-light">
+                                        <span class="icon is-medium">
+                                            <i class="far fa-trash-alt"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+</body>
+<script src="script.js"></script>
+<script src="categories.js"></script>
+</html>
