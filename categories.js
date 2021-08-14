@@ -9,53 +9,62 @@ const divIcons = document.createElement("div");
 const template = document.getElementById('template').content
 const fragment = document.createDocumentFragment()
 
-let listCategories= {}
+let listCategories = {}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('listCategories')) {
+        listCategories = JSON.parse(localStorage.getItem('listCategories'))
+    }
+    addCategory();
+})
+
+categoryContainer.addEventListener('click', (e) => {
+    actBtnDelete(e)
+})
 
 categoryForm.addEventListener('submit', e => {
     e.preventDefault();
-    console.log(categoryInput.value)
-
     createCategory(e)
 })
 
 const createCategory = e => {
-    //Validando el input
-    if(categoryInput.value.trim() === ""){
-        console.log('esta vacio')
+    if (categoryInput.value.trim() === "") {
         return
     }
-//Construyendo el objeto
-    const category  = {
-        id: Date.now(), 
-        name: categoryInput.value, 
+
+    const category = {
+        id: Date.now(),
+        name: categoryInput.value,
         estado: false
     }
-    listCategories[category.id] = category 
+    listCategories[category.id] = category
 
-    form.reset() 
+    form.reset()
     categoryInput.focus()
     addCategory()
 }
 
 const addCategory = () => {
+    localStorage.setItem('listCategories', JSON.stringify(listCategories))
     categoryContainer.innerHTML = "";
     Object.values(listCategories).forEach((category) => {
         const addObjCat = template.cloneNode(true)
         addObjCat.querySelector('span').textContent = category.name
+        addObjCat.querySelectorAll('.far')[0].dataset.id = category.id
+        addObjCat.querySelectorAll('.far')[1].dataset.id = category.id
         fragment.appendChild(addObjCat)
     })
     categoryContainer.appendChild(fragment)
-    console.log(listCategories);
 }
 
-const deleteColumns = (e) => {
-    const itemCategory = e.target;
-  
-    if (e.target.classList.contains("")) {
-      delete categories[e.target.dataset.id]
-      console.log(categories)
-    } else if (e.target.id > 0){
-      delete categories[e.target.dataset.id]
-      console.log(categories)
+const actBtnDelete = (e) => {
+    if (e.target.classList.contains('fa-trash-alt')) {
+        listCategories[e.target.dataset.id].estado = true
+        addCategory()
     }
+    if (e.target.classList.contains('fa-trash-alt')) {
+        delete listCategories[e.target.dataset.id]
+        addCategory()
+    }
+    e.stopPropagation()
 }
