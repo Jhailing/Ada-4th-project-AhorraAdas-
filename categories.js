@@ -1,52 +1,61 @@
-//DOM
+//Select the elements
 const categoryInput = document.getElementById("category-input");
 const categoryButton = document.getElementById("category-button");
+const categoryForm = document.getElementById('form');
 const categoryContainer = document.getElementById("categories");
 const trashIcon = document.createElement("span");
 const newDivCategory = document.createElement("div");
+const divIcons = document.createElement("div");
+const template = document.getElementById('template').content
+const fragment = document.createDocumentFragment()
 
-const addCategory = (event) => {
-    //  console.log('hello');
-    event.preventDefault();
-    //Creando el div principal
-    newDivCategory.classList.add("mb-3");
-    categoryContainer.appendChild(newDivCategory);
-    //Creando columna principal
-    const divColumns = document.createElement("div");
-    divColumns.classList.add("columns", "is-vcentered", "is-mobile");
-    newDivCategory.appendChild(divColumns);
-    //Creando columnas vacias
-    const divColumn = document.createElement("div");
-    divColumn.classList.add("column");
-    divColumns.appendChild(divColumn);
-    //Creando span que contiene los nombres de las categorias
-    const nameCategory = document.createElement("span");
-    nameCategory.classList.add("tag", "is", "primary", "is-ligth", "is-size-6");
-    nameCategory.innerHTML = categoryInput.value;
-    divColumn.appendChild(nameCategory);
-    //Creando div que contienen los iconos
-    const divIcons = document.createElement("div");
-    divIcons.classList.add("column", "is-narrow");
-    divColumns.appendChild(divIcons);
-    //Anclas de los iconos editar
-    const hyperlinkEdit = document.createElement("a");
-    hyperlinkEdit.setAttribute("href", "#");
-    hyperlinkEdit.classList.add("button", "is-light");
-    divIcons.appendChild(hyperlinkEdit);
-    //Icono Editar
-    const editIcon = document.createElement("span");
-    editIcon.innerHTML = `<i class="far fa-edit"></i>`;
-    editIcon.classList.add("icon", "is-medium");
-    hyperlinkEdit.appendChild(editIcon);
-    //Anclas de los iconos editar
-    const hyperlinkTrash = document.createElement("div");
-    //hyperlinkTrash.setAttribute("href", "#");
-    hyperlinkTrash.classList.add("button", "is-light");
-    divIcons.appendChild(hyperlinkTrash);
-    //Icono Eliminar
-    trashIcon.innerHTML = `<i class="far fa-trash-alt"></i>`;
-    trashIcon.classList.add("icon", "is-medium");
-    hyperlinkTrash.appendChild(trashIcon);
-    categoryInput.value = "";
+let listCategories= {}
+
+categoryForm.addEventListener('submit', e => {
+    e.preventDefault();
+    console.log(categoryInput.value)
+
+    createCategory(e)
+})
+
+const createCategory = e => {
+    //Validando el input
+    if(categoryInput.value.trim() === ""){
+        console.log('esta vacio')
+        return
+    }
+//Construyendo el objeto
+    const category  = {
+        id: Date.now(), 
+        name: categoryInput.value, 
+        estado: false
+    }
+    listCategories[category.id] = category 
+
+    form.reset() 
+    categoryInput.focus()
+    addCategory()
 }
-categoryButton.addEventListener("click", addCategory);
+
+const addCategory = () => {
+    categoryContainer.innerHTML = "";
+    Object.values(listCategories).forEach((category) => {
+        const addObjCat = template.cloneNode(true)
+        addObjCat.querySelector('span').textContent = category.name
+        fragment.appendChild(addObjCat)
+    })
+    categoryContainer.appendChild(fragment)
+    console.log(listCategories);
+}
+
+const deleteColumns = (e) => {
+    const itemCategory = e.target;
+  
+    if (e.target.classList.contains("")) {
+      delete categories[e.target.dataset.id]
+      console.log(categories)
+    } else if (e.target.id > 0){
+      delete categories[e.target.dataset.id]
+      console.log(categories)
+    }
+}
