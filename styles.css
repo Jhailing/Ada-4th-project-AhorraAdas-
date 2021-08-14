@@ -1,8 +1,11 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
-body{
-    background-image: url(https://afiecob.com/wp-content/uploads/2020/07/C%C3%B3mo-hacer-un-control-de-gastos-para-tu-negocio.jpg);
+html{
+    background: url(assets/desk-image.jpg) no-repeat center center fixed;
     background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
 
 .buttons{
