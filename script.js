@@ -11,3 +11,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+const getStorage = () =>{
+  const storage = JSON.parse(localStorage.getItem('ahorradas'));
+  if(storage){
+    return storage;
+  }
+  return {
+    operations: [],
+    categories: [
+      {id:1, name:'comida'}
+    ]
+  }
+}
+
+const setStorage = (value) =>{
+  localStorage.setItem('ahorradas', JSON.stringify(value));
+}
