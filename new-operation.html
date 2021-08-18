@@ -48,60 +48,62 @@
         <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
           <div class="box">
             <h2 class="title is-size-2 has-text-weight-bold">Nueva operación</h2>
-            <div class="field mt-6">
-              <label class="label" for="descripcion-input">Descripción</label>
-              <div class="control">
-                <div class="is-fullwidth">
-                  <input class="input" type="text" name="" id="descripcion-input">
-                </div>
-              </div>
-            </div>
-            <div class="field">
-              <label class="label" for="monto-input">Monto</label>
-              <div class="control">
+            <div id="form-add-new-operation">
+              <div class="field mt-6">
+                <label class="label" for="description-input">Descripción</label>
                 <div class="control">
                   <div class="is-fullwidth">
-                    <input class="input" type="number" name="" id="monto-input" value="0">
+                    <input class="input" type="text" name="" id="description-input">
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="field">
-              <label class="label" for="tipo-select">Tipo</label>
-              <div class="control">
-                <div class="select is-fullwidth">
-                  <select id="tipo-operacion">
-                    <option value="GASTO">Gasto</option>
-                    <option value="GANANCIA">Ganancia</option>
-                  </select>
+              <div class="field">
+                <label class="label" for="amount-input">Monto</label>
+                <div class="control">
+                  <div class="control">
+                    <div class="is-fullwidth">
+                      <input class="input" type="number" name="" id="amount-input" value="0">
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="field">
-              <label class="label" for="categorias-select">Categoría</label>
-              <div class="control">
-                <div class="select is-fullwidth">
-                  <select class="categorias-select" id="categorias-select">
-                    <option value="7f082df9-6d36-4d9e-969b-26d43a45bd96">Servicios</option>
-                    <option value="c5bb1c43-4c89-43cf-8dc1-ca2540d30c32">Salidas</option>
-                    <option value="8e9d32b9-b765-4daa-9581-267002b8dfbf">Educación</option>
-                    <option value="557055bb-e7d3-436f-9972-ff73b8749b24">Transporte</option>
-                    <option value="445c5cac-f065-4c7e-bd68-1b29fff0d883">Trabajo</option>
-                  </select>
+              <div class="field">
+                <label class="label" for="tipo-select">Tipo</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select id="type-operation">
+                      <option value="GASTO">Gasto</option>
+                      <option value="GANANCIA">Ganancia</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="field">
-              <label class="label" for="fecha-input">Fecha</label>
-              <div class="control">
-                <div class="is-fullwidth">
-                  <input class="input" type="date" name="" id="fecha-input">
+              <div class="field">
+                <label class="label" for="categorias-select">Categoría</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select class="categories-select" id="categories-select">
+                      <option value="">Servicios</option>
+                      <option value="">Salidas</option>
+                      <option value="">Educación</option>
+                      <option value="">Transporte</option>
+                      <option value="">Trabajo</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="buttons mt-6">
-              <button class="button" id="cancel-new-op-btn">Cancelar</button>
-              <button class="button is-dark" id="add-new-op-btn">Agregar</button>
+              <div class="field">
+                <label class="label" for="date-input">Fecha</label>
+                <div class="control">
+                  <div class="is-fullwidth">
+                    <input class="input" type="date" name="" id="date-input">
+                  </div>
+                </div>
+              </div>
+              <div class="buttons mt-6">
+                <a href="" class="button" id="cancel-add-new-op-btn">Cancelar</a>
+                <button class="button is-dark" id="add-new-op-btn">Agregar</button>
+              </div>
             </div>
           </div>
         </div>
@@ -110,4 +112,5 @@
   </section>
 </body>
 <script src="script.js"></script>
+<script src="operations.js"></script>
 </html>

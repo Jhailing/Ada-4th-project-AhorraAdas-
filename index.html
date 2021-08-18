@@ -138,10 +138,41 @@
                         <div id="with-operations" class="is-hidden">
                             <div class="columns has-text-weight-semibold is-hidden-mobile">
                                 <div class="column is-3">Descripción</div>
-                                <div class="column is-3">Categoría</div>
+                                <div class="column is-2">Categoría</div>
                                 <div class="column is-2 has-text-right">Fecha</div>
                                 <div class="column is-2 has-text-right">Monto</div>
-                                <div class="column is-2 has-text-right">Acciones</div>
+                                <div class="column is-3 has-text-centered">Acciones</div>
+                            </div>
+                            <div id="list-operations">
+                                <template>
+                                    <div class="mb-3" id="item-list-operations">
+                                        <div class="columns is-multiline is-mobile is-vcentered">
+                                            <div class="column is-3-tablet is-6-mobile">
+                                                <h3 class="has-text-weight-semibold">Descripcion ingresada</h3>
+                                            </div>
+                                            <div class="column is-3-tablet is-6-mobile has-text-right-mobile">
+                                                <span class="tag is-primary is-light">Categoria seleccionada</span>
+                                            </div>
+                                            <div class="column is-2-tablet has-text-grey is-hidden-mobile has-text-right-tablet">
+                                                Fecha ingresada
+                                            </div>
+                                            <div class="column is-2-tablet is-6-mobile has-text-weight-bold has-text-right-tablet is-size-4-mobile has-text-danger">
+                                                Monto ingresado
+                                            </div>
+                                            <div class="column is-2-tablet is-6-mobile has-text-right">
+                                                <p class="is-fullwidth">
+                                                    <a href="./edit-operation.html" class="button is-light"><span class="icon is-medium btn-edit-operation"
+                                                        aria-label="Editar">
+                                                        <i class="far fa-edit"></i></span>
+                                                    </a>
+                                                    <a href="#" class="button is-light"><span class="icon is-medium btn-delete-operation" aria-label="Eliminar">
+                                                            <i class="far fa-trash-alt"></i></span>
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </template>
                             </div>
                         </div>
                         <div class="my-6 py-6" id="no-operations">
@@ -155,9 +186,8 @@
                 </div>
             </div>
           </div>
-    </section>   
+    </section> 
+
 </body>
 <script src="script.js"></script>
-<!-- <script src="localStorage.js"></script> -->
-
 </html>
