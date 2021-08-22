@@ -32,7 +32,7 @@
           <a href="./index.html" class="navbar-item is-size-6 has-text-white">
             <i class="fas fa-chart-line mr-2" aria-hidden="true"></i> Balance
           </a>
-          <a href="./categories.html" class="navbar-item is-size-6 has-text-white">
+          <a href="./category.html" class="navbar-item is-size-6 has-text-white">
             <i class="fas fa-tag mr-2" aria-hidden="true"></i> Categoria
           </a>
           <a href="./reports.html" class="navbar-item is-size-6 has-text-white">
@@ -42,26 +42,34 @@
       </div>
     </nav>
   </header>
-  <section class="section mt-5" id="">
-    <div class="container">
-      <div class="columns is-multiline">
-        <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
-          <div class="box">
-            <h2 class="title is-size-3 has-text-weight-bold">Editar categoría</h2>
-            <label class="label mt-6" for="">Nombre</label>
-            <div class="field is-grouped">
-              <div class="control is-expanded">
-                <input class="input" type="text" name="" id="">
+
+  <body>
+    <section class="section mt-5" id="">
+      <div class="container">
+        <div class="columns is-multiline">
+          <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
+            <div class="box">
+              <h2 class="title is-size-3 has-text-weight-bold">Editar categoría</h2>
+              <label class="label mt-6" for="">Nombre</label>
+              <form action="" id="form">
+              <div class="field is-grouped">
+                <div class="control is-expanded">
+                  <input class="input" type="text" placeholder="Ingrese nueva categoria" id="edit-input-category"
+                    aria-required="true" required>
+                </div>
               </div>
-            </div>
-            <div class="buttons mt-6">
-              <button class="button" id="not-save-category-edit-btn">Cancelar</button>
-              <button class="button is-dark" id="save-categoy-edit-btn">Guardar</button>
+              <div class="buttons mt-6">
+                <button type="submit" class="button" onclick="canceledBtn()"
+                  id="not-save-category-edit-btn">Cancelar</button>
+                <button type="submit" class="button is-dark" id="save-categoy-edit-btn">Guardar</button>
+              </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>   
-</body>
+    </section>
+    <script src="./script.js"></script>
+    <script src="./edit-category.js"></script>
+  </body>
 </html>
