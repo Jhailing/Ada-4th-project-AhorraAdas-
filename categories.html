@@ -49,16 +49,16 @@
                     <div class="box">
                         <h2 class="title has-text-weight-bold">Categorías</h2>
                         <label class="label mt-4" for="name-form-category">Nombre</label>
-                            <form id="form" class="is-expanded field is-grouped">
-                                    <input class="input mr-2" type="text" placeholder="Agrega una categoría"
-                                        id="category-input" autofocus required>
+                        <form id="form" class="is-expanded field is-grouped">
+                            <input class="input mr-2" type="text" placeholder="Agrega una categoría" id="category-input"
+                                autofocus required>
 
-                                    <div class="control">
-                                        <button type="submit" class="button is-dark" id="category-button">
-                                            Agregar
-                                        </button>
-                                    </div>
-                            </form>
+                            <div class="control">
+                                <button type="submit" class="button is-dark" id="category-button">
+                                    Agregar
+                                </button>
+                            </div>
+                        </form>
                         <div class="mt-6" id="categories"></div>
                     </div>
                 </div>
@@ -66,27 +66,8 @@
         </div>
         </div>
         </div>
-        <template id="template">
-            <div class="mb-3 list-task">
-                <div class="columns is-vcentered is-mobile">
-                    <div class="column">
-                        <span class="tag is primary is-ligth is-size-6">Servicios</span>
-                    </div>
-                    <div class="column is-narrow">
-                        <a href="./edit-category.html" class="button is-light"><span class="icon is-medium btn-edit"
-                                aria-label="Editar">
-                                <i class="far fa-edit"></i>
-                            </span></a>
-                        <button class=" button is-light"><span class="icon is-medium btn-delete" aria-label="Eliminar">
-                                <i class="far fa-trash-alt"></i>
-                            </span></button>
-                    </div>
-                </div>
-            </div>
-        </template>
     </section>
+    <script src="./script.js"></script>
+    <script src="./categories.js"></script>
 </body>
-<script src="script.js"></script>
-<script src="categories.js"></script>
-
 </html>

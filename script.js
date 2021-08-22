@@ -19,9 +19,7 @@ const getStorage = () =>{
   }
   return {
     operations: [],
-    categories: [
-      {id:1, name:'comida'}
-    ]
+    categories: []
   }
 }
 

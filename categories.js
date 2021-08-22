@@ -1,70 +1,85 @@
-//Select the elements
 const categoryInput = document.getElementById("category-input");
 const categoryButton = document.getElementById("category-button");
 const categoryForm = document.getElementById('form');
 const categoryContainer = document.getElementById("categories");
-const trashIcon = document.createElement("span");
-const newDivCategory = document.createElement("div");
-const divIcons = document.createElement("div");
-const template = document.getElementById('template').content
-const fragment = document.createDocumentFragment()
 
-let listCategories = {}
-
-document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('listCategories')) {
-        listCategories = JSON.parse(localStorage.getItem('listCategories'))
-    }
+document.addEventListener('DOMContentLoaded', ()=> {
     addCategory();
-})
-
-categoryContainer.addEventListener('click', (e) => {
-    actBtnDelete(e)
 })
 
 categoryForm.addEventListener('submit', e => {
     e.preventDefault();
-    createCategory(e)
+    createCategory(e);  
 })
 
 const createCategory = e => {
-    if (categoryInput.value.trim() === "") {
-        return
+    e.preventDefault();
+    const category  = {
+        id: Date.now(), 
+        name: categoryInput.value, 
     }
-
-    const category = {
-        id: Date.now(),
-        name: categoryInput.value,
-        estado: false
-    }
-    listCategories[category.id] = category
-
-    form.reset()
+    console.log(category)
+    form.reset() 
     categoryInput.focus()
+    const storage = getStorage()
+    storage.categories.push(category);
+    setStorage(storage);
     addCategory()
 }
 
 const addCategory = () => {
-    localStorage.setItem('listCategories', JSON.stringify(listCategories))
     categoryContainer.innerHTML = "";
-    Object.values(listCategories).forEach((category) => {
-        const addObjCat = template.cloneNode(true)
-        addObjCat.querySelector('span').textContent = category.name
-        addObjCat.querySelectorAll('.far')[0].dataset.id = category.id
-        addObjCat.querySelectorAll('.far')[1].dataset.id = category.id
-        fragment.appendChild(addObjCat)
-    })
-    categoryContainer.appendChild(fragment)
+    const storage = getStorage();
+  
+    for(const categ of storage.categories){
+        const itemCategories = document.createElement('div');
+        itemCategories.classList.add('mb-3', 'list-task');
+        const columnsCategory = document.createElement('div');
+        columnsCategory.classList.add('columns', 'is-vcentered', 'is-mobile');
+        const columnCategory = document.createElement('div');
+        columnCategory.classList.add('column');
+        const categoryName = document.createElement('span');
+        categoryName.classList.add('tag', 'is-primary', 'is-light', 'is-size-6');
+        categoryName.innerText = categ.name;
+        const divsIcons = document.createElement('div');
+        divsIcons.classList.add('column', 'is-narrow');
+        const buttonEdit = document.createElement('a');
+        buttonEdit.classList.add('button', 'is-light');
+        buttonEdit.dataset.id = categ.id;
+        buttonEdit.setAttribute('href', `./edit-category.html?catId=${categ.id}&catName=${categ.name}`);
+        const iconEdit = document.createElement('span');
+        iconEdit.classList.add('icon', 'is-medium', 'btn-edit');
+        const iconButtonEdit = document.createElement('i');
+        iconButtonEdit.classList.add('far', 'fa-edit');
+        const buttonDelete = document.createElement('button');
+        buttonDelete.classList.add('button', 'is-light');
+        const itemTrash = document.createElement('span');
+        itemTrash.classList.add('icon', 'is-medium', 'btn-delete');
+        const iconButton = document.createElement('i');
+        iconButton.classList.add('far','fa-trash-alt');
+        itemTrash.style.pointerEvents= 'none';
+        buttonDelete.addEventListener('click', deleteColumns);
+        buttonDelete.dataset.id = categ.id;
+        categoryContainer.appendChild(itemCategories);
+        itemCategories.appendChild(columnsCategory);
+        columnsCategory.appendChild(columnCategory);
+        columnCategory.appendChild(categoryName);
+        columnsCategory.appendChild(divsIcons);
+        divsIcons.appendChild(buttonEdit);
+        buttonEdit.appendChild(iconEdit);
+        divsIcons.appendChild(buttonDelete);
+        buttonDelete.appendChild(itemTrash);
+        iconEdit.appendChild(iconButtonEdit);
+        itemTrash.appendChild(iconButton);
+    }
 }
 
-const actBtnDelete = (e) => {
-    if (e.target.classList.contains('fa-trash-alt')) {
-        listCategories[e.target.dataset.id].estado = true
-        addCategory()
-    }
-    if (e.target.classList.contains('fa-trash-alt')) {
-        delete listCategories[e.target.dataset.id]
-        addCategory()
-    }
-    e.stopPropagation()
+function deleteColumns (e) {
+    let deleteById = Number(e.target.dataset.id);
+    const storage = getStorage();
+    const categories = storage.categories.filter(category => category.id !== deleteById )
+    console.log(categories, deleteById, e.target)
+    storage.categories= categories;
+    setStorage(storage);
+    addCategory()
 }
