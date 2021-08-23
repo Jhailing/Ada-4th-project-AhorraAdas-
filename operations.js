@@ -11,10 +11,7 @@ const loadCategories = () => {
     const categories = storage.categories;
     
     for(let category of categories){
-        const optionCetegory = document.createElement('option');
-        optionCetegory.innerHTML = category.name;
-        optionCetegory.setAttribute('value', category.id);
-        selectCategory.appendChild(optionCetegory);
+        selectCategory.innerHTML += `<option value="${category.id}">${category.name}</option>`;
     }
 }
 
