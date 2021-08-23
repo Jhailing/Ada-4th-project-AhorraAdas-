@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AhorrAdas</title>
+    <link rel="shortcut icon" href="assets/barra-favicon.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/f52c88f85d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar px-3 is-black" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item has-text-white" href="">
+                    <h1 class="has-text-weight-bold is-size-2 ml-3 app-title"><i class="fas fa-hand-holding-usd"
+                            width="80" height="80" alt="Ahorradas" aria-hidden="true"></i> AhorrAdas</h1>
+                </a>
+                <a role="button" class="navbar-burger is-justify-content-center is-align-items-center" aria-label="menu"
+                    aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarBasicExample" class="navbar-menu is-align-content-space-evenly">
+                <div class="navbar-end">
+                    <a href="./index.html" class="navbar-item is-size-6 has-text-white">
+                        <i class="fas fa-chart-line mr-2" aria-hidden="true"></i> Balance
+                    </a>
+                    <a href="./categories.html" class="navbar-item is-size-6 has-text-white">
+                        <i class="fas fa-tag mr-2" aria-hidden="true"></i> Categorías
+                    </a>
+                    <a href="./reports.html" class="navbar-item is-size-6 has-text-white">
+                        <i class="fas fa-chart-pie mr-2" aria-hidden="true"></i> Reportes
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="section mt-5 vista" id="edit-operation">
+        <div class="container">
+          <div class="columns is-multiline">
+            <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
+              <div class="box">
+                <h2 class="title is-size-2 has-text-weight-bold">Editar operación</h2>
+                <div id="form-edit-operation">
+                  <div class="field mt-6">
+                    <label class="label" for="edit-description-input">Descripción</label>
+                    <div class="control">
+                      <div class="is-fullwidth">
+                        <input class="input" type="text" name="" id="edit-description-input" autofocus required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label" for="edit-amount-input">Monto</label>
+                    <div class="control">
+                      <div class="control">
+                        <div class="is-fullwidth">
+                          <input class="input" type="number" name="" id="edit-amount-input" value="0" autofocus required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label" for="edit-type-operation">Tipo</label>
+                    <div class="control">
+                      <div class="select is-fullwidth">
+                        <select id="edit-type-operation">
+                          <option value="GASTO">Gasto</option>
+                          <option value="GANANCIA">Ganancia</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label" for="edit-categories-select">Categoría</label>
+                    <div class="control">
+                      <div class="select is-fullwidth">
+                        <select id="edit-categories-select"></select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label" for="edit-date-input">Fecha</label>
+                    <div class="control">
+                      <div class="is-fullwidth">
+                        <input class="input" type="date" name="" id="edit-date-input" autofocus required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="buttons mt-6">
+                    <a href="./index.html" class="button" id="cancel-edit-op-btn">Cancelar</a>
+                    <button class="button is-dark" id="edit-op-btn">Editar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+</body>
+<script src="script.js"></script>
+<script src="edit-operation.js"></script>
+</html>

@@ -53,7 +53,7 @@ const showOperations = () =>{
         contActionBtns.classList.add('is-fullwidth');
         const editBtn = document.createElement('a');
         editBtn.classList.add('button', 'is-light');
-        editBtn.setAttribute('href', './edit-operation.html');
+        editBtn.setAttribute('href', `./edit-operation.html?opId=${op.id}&opDescription=${op.description}&opAmount=${op.amount}&opType=${op.type}&opCategory${op.category}&opDate${op.date}`);
         const contIconEdit = document.createElement('span');
         contIconEdit.classList.add('icon', 'is-medium', 'btn-edit-operation');
         contIconEdit.setAttribute('aria-label', 'Editar');
