@@ -19,11 +19,25 @@ html{
 .navbar{
     height: 100px;
 }
-
+.navbar-menu{
+    background-color: #0a0a0a;
+    transition: background-color .7s;
+    margin-bottom: 20px;
+}
 a.navbar-item:hover{
     transition: background-color .7s;
 }
 
-.is-active{
-    background-color: #0a0a0a;
+@media (max-width: 718px){
+    .navbar-burger{
+       width: 4rem;
+       height: 4rem;
+       margin-top: 1rem;
+     
+    }
+    .navbar-menu{
+        width:100%;
+        background-color: #0a0a0a;
+        transition: background-color .7s;
+    }
 }
