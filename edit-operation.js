@@ -19,25 +19,39 @@ editCategorySelect.value = categoryOpParams;
 editDateInput.value = dateOpParams;
 
 const editOperation = function (e) {
-    const storage = getStorage();
-    for (let i = 0; i < storage.operations.length; i++) {
-        if (storage.operations[i].id.toString() == idOpParams) {
-            storage.operations[i].description = editDescriptionInput;
-            storage.operations[i].amount = editAmountInput;
-            storage.operations[i].type = editTypeInput;
-            storage.operations[i].category = editCategorySelect;
-            storage.operations[i].date = editDateInput;
-            break;
+    e.preventDefault();
+    let showDescription = editDescriptionInput.value;
+    let showAmount = editAmountInput.value;
+    let showType = editTypeInput.value;
+    let showCategory = editCategorySelect.value;
+    let showDate = editDateInput.value;
+    if(showDescription != ""){
+        const storage = getStorage();
+        for (let i = 0; i < storage.operations.length; i++) {
+            if (storage.operations[i].id == idOpParams) {
+                storage.operations[i].description = showDescription;
+                storage.operations[i].amount = showAmount;
+                storage.operations[i].type = showType;
+                storage.operations[i].category = showCategory;
+                storage.operations[i].date = showDate;
+                break;
+            }
         }
+        setStorage(storage);
     }
-    storage.operations.forEach(function (element) {
-        if (element.id == params.get("id")) {
-            editDescriptionInput = element.description;
-            console.log(editDescriptionInput);
-        }
-    })
-    setStorage(storage);
-
     window.location.assign("./index.html");
 }
 editOperationBtn.addEventListener('click', editOperation);
+
+const loadCategories = () => {
+    const storage = getStorage();
+    const categories = storage.categories;
+    
+    for(let category of categories){
+        editCategorySelect.innerHTML += `<option value="${category.id}">${category.name}</option>`;
+    }
+}
+
+window.addEventListener('load', () =>{
+    loadCategories();
+})

@@ -34,10 +34,12 @@ const showOperations = () =>{
         cellCategory.classList.add('column', 'is-3-tablet', 'is-6-mobile', 'has-text-right-mobile');
         const categorySelected = document.createElement('span');
         categorySelected.classList.add('tag', 'is-primary', 'is-light');
-        categorySelected.innerHTML = op.category;
+        for(const category of storage.categories){
+            categorySelected.innerHTML = category.name;
+        };
         const cellDate = document.createElement('div');
         cellDate.classList.add('column', 'is-2-tablet', 'has-text-grey', 'is-hidden-mobile', 'has-text-centered-tablet');
-        cellDate.innerHTML = op.date;
+        cellDate.innerHTML = new Date (op.date);
         const cellAmount = document.createElement('div');
         cellAmount.classList.add('column', 'is-2-tablet', 'is-6-mobile', 'has-text-weight-bold', 'has-text-right-tablet', 'is-size-4-mobile');
         if(op.type === 'GASTO'){
