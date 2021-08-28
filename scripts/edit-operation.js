@@ -16,7 +16,7 @@ editDescriptionInput.value = descriptionOpParams;
 editAmountInput.value = amountOpParams;
 editTypeInput.value = typeOpParams;
 editCategorySelect.value = categoryOpParams;
-editDateInput.value = dateOpParams;
+editDateInput.valueAsDate = dateOpParams;
 
 const editOperation = function (e) {
     e.preventDefault();
@@ -32,7 +32,10 @@ const editOperation = function (e) {
                 storage.operations[i].description = showDescription;
                 storage.operations[i].amount = showAmount;
                 storage.operations[i].type = showType;
-                storage.operations[i].category = showCategory;
+                // storage.operations[i].category = showCategory;
+                for(const category of storage.categories){
+                    categorySelected.innerHTML = `${category.name}`;
+                };
                 storage.operations[i].date = showDate;
                 break;
             }
@@ -47,8 +50,8 @@ const loadCategories = () => {
     const storage = getStorage();
     const categories = storage.categories;
     
-    for(let category of categories){
-        editCategorySelect.innerHTML += `<option value="${category.id}">${category.name}</option>`;
+    for(const category of categories){
+        editCategorySelect.innerHTML = `<option value="${category.name}">${category.name}</option>`;
     }
 }
 
