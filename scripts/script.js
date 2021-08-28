@@ -28,7 +28,14 @@ const getStorage = () =>{
   }
   return {
     operations: [],
-    categories: []
+    categories: [
+      {id:Date.now(), name: 'Comida'}, 
+      {id:Date.now(), name: 'Educación'}, 
+      {id:Date.now(), name: 'Salidas'}, 
+      {id:Date.now(), name: 'Servicios'}, 
+      {id:Date.now(), name: 'Trabajo'}, 
+      {id:Date.now(), name: 'Transporte'}
+    ]
   }
 }
 

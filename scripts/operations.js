@@ -22,7 +22,7 @@ const createNewOperation = (e) => {
         amount: amountNewOperation.value,
         type: selectTypeOperation.value,
         category: selectCategory.value,
-        date: dateNewOperation.valueAsDate
+        date: dateNewOperation.value
     };
     const storage = getStorage();
     storage.operations.push(newOperation);

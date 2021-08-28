@@ -1,7 +1,15 @@
-// FILTER BALANCE
 const earningsTotal = document.getElementById('earnings');
 const expensesTotal = document.getElementById('expenses');
 const totalBalance = document.getElementById('total-balance');
+const toggleFilters = document.getElementById('toggle-filters');
+const filters = document.getElementById('filters');
+const categoryFilters = document.getElementById('filter-category');
+const typeFilters = document.getElementById('filter-type');
+const filtersByDate = document.getElementById('filter-date');
+const storage = getStorage();
+const operations = storage.operations;
+
+// FILTER BALANCE
 earningsTotal.innerText = "$ 0";
 expensesTotal.innerText = "$ 0";
 totalBalance.innerText = "$ 0";
@@ -15,9 +23,6 @@ let sumProfit = 0;
 let balanceTotal = 0;
 
 const balance = function () {
-    let storage = getStorage();
-    const operations = storage.operations;
-
     for (let operation of operations) {
         if (operation.type === "GASTO") {
             sumOfExpenses = sumOfExpenses + parseInt(operation.amount);
@@ -37,12 +42,8 @@ const balance = function () {
 
 
 //Toggle Filters
-
-const toggleFilters = document.getElementById('toggle-filters');
-const filters = document.getElementById('filters');
-
-const swapFilters = ()=>{
-    if (toggleFilters.innerHTML === 'Ocultar filtros'){
+const swapFilters = () => {
+    if (toggleFilters.innerHTML === 'Ocultar filtros') {
         toggleFilters.innerHTML = 'Mostrar filtros'
         filters.classList.add('is-hidden')
     } else {
@@ -51,3 +52,60 @@ const swapFilters = ()=>{
     }
 }
 toggleFilters.addEventListener('click', swapFilters);
+
+
+//Category Filters
+const loadCategories = () => {
+    const storage = getStorage();
+    const categories = storage.categories;
+    for (let category of categories) {
+        categoryFilters.innerHTML += `<option value="${category.name}">${category.name}</option>`;
+    }
+}
+const loadCategoryFilters = (idCategory, operations) => {
+    return operations.filter((element) => element.category === idCategory);
+};
+
+window.addEventListener('load', () => {
+    loadCategories();
+  
+})
+
+
+//Filters by Type
+const loadFiltersByType = (type, operations) => {
+    return operations.filter(element => element.type === type);
+}
+
+// Date Filters
+const dateFilters = (operations, dateValue) => {
+    return operations.filter((element) => {
+        return dateValue <= new Date(element.dateValue);
+    });
+};
+
+// Filters
+const filtersAll = () => {
+    const typeValue = typeFilters.value;
+    const categoryValue = categoryFilters.value;
+    const dateFilter = new Date(filtersByDate).value.replace(/-/g, '/');
+    const storage = getStorage();
+
+    if (typeValue !== 'Todos') {
+        operations = loadFiltersByType(type, operations);
+        console.log(operations)
+    }
+    if (categoryValue !== 'Todas') {
+        operations = loadCategoryFilters(idCategory, operations);
+        console.log(operations)
+    }
+
+    if (dateFilter !== "") {
+        const dateValue = new Date(dateFilter);
+        operations = dateFilters(operations, dateValue);
+        console.log(operations);
+    }
+};
+
+categoryFilters.addEventListener("change", filtersAll)
+typeFilters.addEventListener("change", filtersAll)

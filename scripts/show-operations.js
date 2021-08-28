@@ -20,7 +20,7 @@ const showOperations = () =>{
     operationsList.innerHTML = '';
 
     for(const op of storage.operations){
-
+        const date = new Date(op.date);
         const itemOperations = document.createElement('div');
         itemOperations.classList.add('mb-3');
         const cellsContainer = document.createElement('div');
@@ -35,11 +35,11 @@ const showOperations = () =>{
         const categorySelected = document.createElement('span');
         categorySelected.classList.add('tag', 'is-primary', 'is-light');
         for(const category of storage.categories){
-            categorySelected.innerHTML = category.name;
+            categorySelected.innerHTML = `${category.name}`;
         };
         const cellDate = document.createElement('div');
         cellDate.classList.add('column', 'is-2-tablet', 'has-text-grey', 'is-hidden-mobile', 'has-text-centered-tablet');
-        cellDate.innerHTML = new Date (op.date);
+        cellDate.innerText =`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
         const cellAmount = document.createElement('div');
         cellAmount.classList.add('column', 'is-2-tablet', 'is-6-mobile', 'has-text-weight-bold', 'has-text-right-tablet', 'is-size-4-mobile');
         if(op.type === 'GASTO'){
@@ -99,3 +99,4 @@ function deleteOperation (e) {
     setStorage(storage);
     showOperations();
 }
+
