@@ -5,6 +5,19 @@ const editCategorySelect = document.getElementById('edit-categories-select')
 const editDateInput = document.getElementById('edit-date-input');
 const editOperationBtn = document.getElementById('edit-op-btn');
 
+window.addEventListener('load', () =>{
+    loadCategories();
+})
+
+const loadCategories = () => {
+    const storage = getStorage();
+    const categories = storage.categories;
+    
+    for(let category of categories){
+        editCategorySelect.innerHTML += `<option value="${category.name}">${category.name}</option>`;
+    }
+}
+
 let params = new URLSearchParams(window.location.search);
 let idOpParams = params.get('opId');
 let descriptionOpParams = params.get('opDescription');
@@ -45,16 +58,3 @@ const editOperation = function (e) {
     window.location.assign("./index.html");
 }
 editOperationBtn.addEventListener('click', editOperation);
-
-const loadCategories = () => {
-    const storage = getStorage();
-    const categories = storage.categories;
-    
-    for(const category of categories){
-        editCategorySelect.innerHTML = `<option value="${category.name}">${category.name}</option>`;
-    }
-}
-
-window.addEventListener('load', () =>{
-    loadCategories();
-})
