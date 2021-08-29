@@ -15,16 +15,15 @@ categoryForm.addEventListener('submit', e => {
 const createCategory = e => {
     e.preventDefault();
     const category  = {
-        id: Date.now(), 
+        id: generatorId(), 
         name: categoryInput.value, 
     }
-    console.log(category)
-    form.reset() 
-    categoryInput.focus()
-    const storage = getStorage()
+    form.reset();
+    categoryInput.focus();
+    const storage = getStorage();
     storage.categories.push(category);
     setStorage(storage);
-    addCategory()
+    addCategory();
 }
 
 const addCategory = () => {
@@ -75,11 +74,10 @@ const addCategory = () => {
 }
 
 function deleteColumns (e) {
-    let deleteById = Number(e.target.dataset.id);
+    let deleteById = e.target.dataset.id;
     const storage = getStorage();
-    const categories = storage.categories.filter(category => category.id !== deleteById )
-    console.log(categories, deleteById, e.target)
+    const categories = storage.categories.filter(category => category.id !== deleteById);
     storage.categories= categories;
     setStorage(storage);
-    addCategory()
+    addCategory();
 }
