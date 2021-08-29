@@ -6,12 +6,19 @@ const selectTypeOperation = document.getElementById('type-operation');
 const selectCategory = document.getElementById('categories-select');
 const dateNewOperation = document.getElementById('date-input');
 
+const restartViewOperation = () => {
+    newOperationName.value = '';
+    amountNewOperation.value = 0;
+    selectTypeOperation.value = 'GASTO';
+    dateNewOperation.valueAsDate = new Date();
+}
+
 const loadCategories = () => {
     const storage = getStorage();
     const categories = storage.categories;
     
     for(let category of categories){
-        selectCategory.innerHTML += `<option value="${category.id}">${category.name}</option>`;
+        selectCategory.innerHTML += `<option value="${category.name}">${category.name}</option>`;
     }
 }
 
@@ -22,7 +29,7 @@ const createNewOperation = (e) => {
         amount: amountNewOperation.value,
         type: selectTypeOperation.value,
         category: selectCategory.value,
-        date: dateNewOperation.valueAsDate
+        date: dateNewOperation.value
     };
     const storage = getStorage();
     storage.operations.push(newOperation);
@@ -40,4 +47,5 @@ addNewOperationBtn.addEventListener('click', function(){
 
 window.addEventListener('load', () =>{
     loadCategories();
+    restartViewOperation();
 })
