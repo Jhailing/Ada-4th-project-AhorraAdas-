@@ -81,3 +81,4 @@ function deleteColumns (e) {
     setStorage(storage);
     addCategory();
 }
+

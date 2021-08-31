@@ -3,13 +3,20 @@ const containerNoOperations = document.getElementById('no-operations');
 const operationsList = document.getElementById('list-operations');
 
 document.addEventListener('DOMContentLoaded', ()=> {
-    showOperations();
+    const storage = getStorage();
+    showOperations(storage.operations);
 })
 
-const showOperations = () =>{
-    const storage = getStorage();
 
-    if(!storage.operations.length){
+const getCategoryById = (id) => {
+    const categories = storage.categories.filter(category => category.id === id);
+    console.log('getCat');
+    console.log(categories);
+    return categories[0];
+}
+
+const showOperations = (operations) =>{
+    if(!operations.length){
         containerNoOperations.classList.remove('is-hidden');
         containerWithOperations.classList.add('is-hidden');
         return
@@ -19,7 +26,7 @@ const showOperations = () =>{
 
     operationsList.innerHTML = '';
 
-    for(const op of storage.operations){
+    for(const op of operations){
         const date = new Date(op.date);
         const itemOperations = document.createElement('div');
         itemOperations.classList.add('mb-3');
@@ -34,13 +41,14 @@ const showOperations = () =>{
         cellCategory.classList.add('column', 'is-3-tablet', 'is-6-mobile', 'has-text-right-mobile');
         const categorySelected = document.createElement('span');
         categorySelected.classList.add('tag', 'is-primary', 'is-light');
-        categorySelected.innerHTML = op.category;
+        const category = getCategoryById( op.category);
+        categorySelected.innerHTML = category.name;
         const cellDate = document.createElement('div');
         cellDate.classList.add('column', 'is-2-tablet', 'has-text-grey', 'is-hidden-mobile', 'has-text-centered-tablet');
-        cellDate.innerHTML = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        cellDate.innerHTML = op.date;
         const cellAmount = document.createElement('div');
         cellAmount.classList.add('column', 'is-2-tablet', 'is-6-mobile', 'has-text-weight-bold', 'has-text-right-tablet', 'is-size-4-mobile');
-        if(op.type === 'GASTO'){
+        if(op.type === 'expense'){
             cellAmount.classList.add('has-text-danger');
             cellAmount.innerHTML = `-$ ${op.amount}`;
         } else{
@@ -53,7 +61,7 @@ const showOperations = () =>{
         contActionBtns.classList.add('is-fullwidth');
         const editBtn = document.createElement('a');
         editBtn.classList.add('button', 'is-light');
-        editBtn.setAttribute('href', `./edit-operation.html?opId=${op.id}&opDescription=${op.description}&opAmount=${op.amount}&opType=${op.type}&opCategory${op.category}&opDate${op.date}`);
+        editBtn.setAttribute('href', `./edit-operation.html?opId=${op.id}&opDescription=${op.description}&opAmount=${op.amount}&opType=${op.type}&opCategory=${op.category}&opDate=${op.date}`);
         const contIconEdit = document.createElement('span');
         contIconEdit.classList.add('icon', 'is-medium', 'btn-edit-operation');
         contIconEdit.setAttribute('aria-label', 'Editar');
@@ -95,5 +103,5 @@ function deleteOperation (e) {
     const operations = storage.operations.filter(op => op.id !== deleteById);
     storage.operations = operations;
     setStorage(storage);
-    showOperations();
+    showOperations(operations);
 }
