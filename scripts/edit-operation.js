@@ -7,6 +7,7 @@ const editOperationBtn = document.getElementById('edit-op-btn');
 
 window.addEventListener('load', () =>{
     loadCategories();
+    loadOperation();
 })
 
 const loadCategories = () => {
@@ -14,22 +15,24 @@ const loadCategories = () => {
     const categories = storage.categories;
     
     for(let category of categories){
-        editCategorySelect.innerHTML += `<option value="${category.name}">${category.name}</option>`;
+        editCategorySelect.innerHTML += `<option value="${category.id}">${category.name}</option>`;
     }
 }
 
-let params = new URLSearchParams(window.location.search);
-let idOpParams = params.get('opId');
-let descriptionOpParams = params.get('opDescription');
-let amountOpParams = params.get('opAmount');
-let typeOpParams = params.get('opType');
-let categoryOpParams = params.get('opCategory');
-let dateOpParams = params.get('opDate');
-editDescriptionInput.value = descriptionOpParams;
-editAmountInput.value = amountOpParams;
-editTypeInput.value = typeOpParams;
-editCategorySelect.value = categoryOpParams;
-editDateInput.valueAsDate = dateOpParams;
+const loadOperation = () => {
+    const params = new URLSearchParams(window.location.search);
+    const idOpParams = params.get('opId');
+    const descriptionOpParams = params.get('opDescription');
+    const amountOpParams = params.get('opAmount');
+    const typeOpParams = params.get('opType');
+    const categoryOpParams = params.get('opCategory');
+    const dateOpParams = params.get('opDate');
+    editDescriptionInput.value = descriptionOpParams;
+    editAmountInput.value = amountOpParams;
+    editTypeInput.value = typeOpParams;
+    editCategorySelect.value = categoryOpParams;
+    editDateInput.value = dateOpParams;
+}
 
 const editOperation = function (e) {
     e.preventDefault();

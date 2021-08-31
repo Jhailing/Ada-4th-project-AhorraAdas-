@@ -9,7 +9,7 @@ const dateNewOperation = document.getElementById('date-input');
 const restartViewOperation = () => {
     newOperationName.value = '';
     amountNewOperation.value = 0;
-    selectTypeOperation.value = 'GASTO';
+    selectTypeOperation.value = 'expense';
     dateNewOperation.valueAsDate = new Date();
 }
 
@@ -18,18 +18,20 @@ const loadCategories = () => {
     const categories = storage.categories;
     
     for(let category of categories){
-        selectCategory.innerHTML += `<option value="${category.name}">${category.name}</option>`;
+        selectCategory.innerHTML += `<option value="${category.id}">${category.name}</option>`;
     }
 }
 
 const createNewOperation = (e) => {
+    const date = dateNewOperation.valueAsDate;
+    console.log(date);
     const newOperation = {
         id: generatorId(),
         description: newOperationName.value,
         amount: amountNewOperation.value,
         type: selectTypeOperation.value,
         category: selectCategory.value,
-        date: dateNewOperation.value
+        date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
     };
     const storage = getStorage();
     storage.operations.push(newOperation);

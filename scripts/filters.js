@@ -24,10 +24,10 @@ let balanceTotal = 0;
 
 const balance = function () {
     for (let operation of operations) {
-        if (operation.type === "GASTO") {
+        if (operation.type === "expense") {
             sumOfExpenses = sumOfExpenses + parseInt(operation.amount);
             expensesTotal.innerHTML = `$ - ${sumOfExpenses}`;
-        } else if (operation.type === "GANANCIA") {
+        } else if (operation.type === "profit") {
             sumProfit = sumProfit + parseInt(operation.amount);
             earningsTotal.innerHTML = `$ + ${sumProfit}`;
         }
@@ -58,6 +58,7 @@ toggleFilters.addEventListener('click', swapFilters);
 const loadCategories = () => {
     const storage = getStorage();
     const categories = storage.categories;
+    categoryFilters.innerHTML += `<option value="every">Todas</option>`;
     for (let category of categories) {
         categoryFilters.innerHTML += `<option value="${category.name}">${category.name}</option>`;
     }
@@ -88,23 +89,32 @@ const dateFilters = (operations, dateValue) => {
 const filtersAll = () => {
     const typeValue = typeFilters.value;
     const categoryValue = categoryFilters.value;
-    const dateFilter = new Date(filtersByDate).value.replace(/-/g, '/');
+    // const dateFilter = new Date(filtersByDate).value.replace(/-/g, '/');
     const storage = getStorage();
+    let filterOperations = storage.operations;
+    console.log('filterOperations');
+    console.log(filterOperations);
 
-    if (typeValue !== 'Todos') {
-        operations = loadFiltersByType(type, operations);
-        console.log(operations)
+    if (typeValue !== 'every') {
+        console.log(typeValue);
+        filterOperations = loadFiltersByType(typeValue, filterOperations);
+        console.log('filterOperations');
+        console.log(filterOperations);
     }
-    if (categoryValue !== 'Todas') {
-        operations = loadCategoryFilters(idCategory, operations);
-        console.log(operations)
+    if (categoryValue !== 'every') {
+        console.log('categoryValue');
+        
+        console.log(categoryValue);
+        filterOperations = loadCategoryFilters(categoryValue, filterOperations);
+        console.log(filterOperations)
     }
 
-    if (dateFilter !== "") {
-        const dateValue = new Date(dateFilter);
-        operations = dateFilters(operations, dateValue);
-        console.log(operations);
-    }
+    // if (dateFilter !== "") {
+    //     const dateValue = new Date(dateFilter);
+    //     operations = dateFilters(operations, dateValue);
+    //     console.log(operations);
+    // }
+    showOperations(filterOperations);
 };
 
 categoryFilters.addEventListener("change", filtersAll)
