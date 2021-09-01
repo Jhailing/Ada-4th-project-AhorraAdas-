@@ -4,6 +4,7 @@ const editTypeInput = document.getElementById('edit-type-operation');
 const editCategorySelect = document.getElementById('edit-categories-select')
 const editDateInput = document.getElementById('edit-date-input');
 const editOperationBtn = document.getElementById('edit-op-btn');
+let idOpParams;
 
 window.addEventListener('load', () =>{
     loadCategories();
@@ -21,7 +22,7 @@ const loadCategories = () => {
 
 const loadOperation = () => {
     const params = new URLSearchParams(window.location.search);
-    const idOpParams = params.get('opId');
+    idOpParams = params.get('opId');
     const descriptionOpParams = params.get('opDescription');
     const amountOpParams = params.get('opAmount');
     const typeOpParams = params.get('opType');

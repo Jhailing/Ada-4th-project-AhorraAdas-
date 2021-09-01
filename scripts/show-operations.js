@@ -45,7 +45,9 @@ const showOperations = (operations) =>{
         categorySelected.innerHTML = category.name;
         const cellDate = document.createElement('div');
         cellDate.classList.add('column', 'is-2-tablet', 'has-text-grey', 'is-hidden-mobile', 'has-text-centered-tablet');
-        cellDate.innerHTML = op.date;
+        const dateComponent =  op.date.split('-');
+        console.log(dateComponent);
+        cellDate.innerHTML = `${dateComponent[2]}/${dateComponent[1]}/${dateComponent[0]}`;
         const cellAmount = document.createElement('div');
         cellAmount.classList.add('column', 'is-2-tablet', 'is-6-mobile', 'has-text-weight-bold', 'has-text-right-tablet', 'is-size-4-mobile');
         if(op.type === 'expense'){
