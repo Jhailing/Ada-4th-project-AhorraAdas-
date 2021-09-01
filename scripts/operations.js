@@ -10,7 +10,7 @@ const restartViewOperation = () => {
     newOperationName.value = '';
     amountNewOperation.value = 0;
     selectTypeOperation.value = 'expense';
-    dateNewOperation.valueAsDate = new Date();
+    dateNewOperation.value = today();
 }
 
 const loadCategories = () => {
@@ -24,14 +24,13 @@ const loadCategories = () => {
 
 const createNewOperation = (e) => {
     const date = dateNewOperation.valueAsDate;
-    console.log(date);
     const newOperation = {
         id: generatorId(),
         description: newOperationName.value,
         amount: amountNewOperation.value,
         type: selectTypeOperation.value,
         category: selectCategory.value,
-        date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+        date: dateNewOperation.value
     };
     const storage = getStorage();
     storage.operations.push(newOperation);

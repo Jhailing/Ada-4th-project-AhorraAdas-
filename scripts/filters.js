@@ -69,7 +69,7 @@ const loadCategoryFilters = (idCategory, operations) => {
 
 window.addEventListener('load', () => {
     loadCategories();
-  
+    filtersByDate.value = today();
 })
 
 
@@ -92,21 +92,12 @@ const filtersAll = () => {
     // const dateFilter = new Date(filtersByDate).value.replace(/-/g, '/');
     const storage = getStorage();
     let filterOperations = storage.operations;
-    console.log('filterOperations');
-    console.log(filterOperations);
 
     if (typeValue !== 'every') {
-        console.log(typeValue);
         filterOperations = loadFiltersByType(typeValue, filterOperations);
-        console.log('filterOperations');
-        console.log(filterOperations);
     }
     if (categoryValue !== 'every') {
-        console.log('categoryValue');
-        
-        console.log(categoryValue);
         filterOperations = loadCategoryFilters(categoryValue, filterOperations);
-        console.log(filterOperations)
     }
 
     // if (dateFilter !== "") {
