@@ -3,13 +3,12 @@ const expensesTotal = document.getElementById('expenses');
 const totalBalance = document.getElementById('total-balance');
 const toggleFilters = document.getElementById('toggle-filters');
 const filters = document.getElementById('filters');
-const categoryFilters = document.getElementById('filter-category');
-const typeFilters = document.getElementById('filter-type');
-const filtersByDate = document.getElementById('filter-date');
+const categoryFilter = document.getElementById('filter-category');
+const typeFilter = document.getElementById('filter-type');
+const dateFilter = document.getElementById('filter-date');
 const storage = getStorage();
 const operations = storage.operations;
 
-// FILTER BALANCE
 earningsTotal.innerText = "$ 0";
 expensesTotal.innerText = "$ 0";
 totalBalance.innerText = "$ 0";
@@ -40,8 +39,6 @@ const balance = function () {
     setStorage(storage);
 }
 
-
-//Toggle Filters
 const swapFilters = () => {
     if (toggleFilters.innerHTML === 'Ocultar filtros') {
         toggleFilters.innerHTML = 'Mostrar filtros'
@@ -53,60 +50,55 @@ const swapFilters = () => {
 }
 toggleFilters.addEventListener('click', swapFilters);
 
-
-//Category Filters
 const loadCategories = () => {
     const storage = getStorage();
     const categories = storage.categories;
-    categoryFilters.innerHTML += `<option value="every">Todas</option>`;
+    categoryFilter.innerHTML += `<option value="every">Todas</option>`;
     for (let category of categories) {
-        categoryFilters.innerHTML += `<option value="${category.name}">${category.name}</option>`;
+        categoryFilter.innerHTML += `<option value="${category.id}">${category.name}</option>`;
     }
 }
-const loadCategoryFilters = (idCategory, operations) => {
-    return operations.filter((element) => element.category === idCategory);
-};
 
 window.addEventListener('load', () => {
     loadCategories();
-    filtersByDate.value = today();
+    dateFilter.value = today();
+    filtersAll();
 })
 
-
-//Filters by Type
-const loadFiltersByType = (type, operations) => {
+const filterOperationsByType = (type, operations) => {
     return operations.filter(element => element.type === type);
 }
 
-// Date Filters
-const dateFilters = (operations, dateValue) => {
+const filterOperationsByCategory = (idCategory, operations) => {
+    return operations.filter((element) => element.category === idCategory);
+};
+
+const filterOperationsByDate = (dateValue, operations) => {
     return operations.filter((element) => {
-        return dateValue <= new Date(element.dateValue);
+        var d1 = Date.parse(dateValue);
+        var d2 = Date.parse(element.date);
+        return d1 <= d2;
     });
 };
 
-// Filters
 const filtersAll = () => {
-    const typeValue = typeFilters.value;
-    const categoryValue = categoryFilters.value;
-    // const dateFilter = new Date(filtersByDate).value.replace(/-/g, '/');
+    const typeValue = typeFilter.value;
+    const categoryValue = categoryFilter.value;
+    const dateValue = dateFilter.value;
     const storage = getStorage();
     let filterOperations = storage.operations;
 
     if (typeValue !== 'every') {
-        filterOperations = loadFiltersByType(typeValue, filterOperations);
+        filterOperations = filterOperationsByType(typeValue, filterOperations);
     }
     if (categoryValue !== 'every') {
-        filterOperations = loadCategoryFilters(categoryValue, filterOperations);
+        filterOperations = filterOperationsByCategory(categoryValue, filterOperations);
     }
 
-    // if (dateFilter !== "") {
-    //     const dateValue = new Date(dateFilter);
-    //     operations = dateFilters(operations, dateValue);
-    //     console.log(operations);
-    // }
+    filterOperations = filterOperationsByDate(dateValue, filterOperations);
     showOperations(filterOperations);
 };
 
-categoryFilters.addEventListener("change", filtersAll)
-typeFilters.addEventListener("change", filtersAll)
+categoryFilter.addEventListener("change", filtersAll)
+typeFilter.addEventListener("change", filtersAll)
+dateFilter.addEventListener("change", filtersAll)
