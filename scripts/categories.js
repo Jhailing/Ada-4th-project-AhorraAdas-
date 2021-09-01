@@ -57,8 +57,8 @@ const addCategory = () => {
         const iconButton = document.createElement('i');
         iconButton.classList.add('far','fa-trash-alt');
         itemTrash.style.pointerEvents= 'none';
-        buttonDelete.addEventListener('click', deleteColumns);
         buttonDelete.dataset.id = categ.id;
+        buttonDelete.addEventListener('click', deleteColumns);
         categoryContainer.appendChild(itemCategories);
         itemCategories.appendChild(columnsCategory);
         columnsCategory.appendChild(columnCategory);
@@ -78,7 +78,7 @@ function deleteColumns (e) {
     const storage = getStorage();
     const categories = storage.categories.filter(category => category.id !== deleteById);
     storage.categories= categories;
+    console.log(deleteById);
     setStorage(storage);
     addCategory();
 }
-

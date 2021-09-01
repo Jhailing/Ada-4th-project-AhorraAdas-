@@ -4,7 +4,7 @@ const operationsList = document.getElementById('list-operations');
 
 document.addEventListener('DOMContentLoaded', ()=> {
     const storage = getStorage();
-    showOperations(storage.operations);
+    showOperations(operations);
 })
 
 
@@ -41,8 +41,8 @@ const showOperations = (operations) =>{
         cellCategory.classList.add('column', 'is-3-tablet', 'is-6-mobile', 'has-text-right-mobile');
         const categorySelected = document.createElement('span');
         categorySelected.classList.add('tag', 'is-primary', 'is-light');
-        const category = getCategoryById( op.category);
-        categorySelected.innerHTML = category.name;
+        const category = getCategoryById(op.category);
+        categorySelected.innerHTML = op.category;
         const cellDate = document.createElement('div');
         cellDate.classList.add('column', 'is-2-tablet', 'has-text-grey', 'is-hidden-mobile', 'has-text-centered-tablet');
         cellDate.innerHTML = op.date;
