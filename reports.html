@@ -13,7 +13,7 @@
       
       <body>
         <header>
-          <nav class="navbar px-3 is-black has-shadow" role="navigation" aria-label="main navigation">
+          <nav class="navbar px-3 is-black" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
               <a class="navbar-item has-text-white" href="">
                 <h1 class="has-text-weight-bold is-size-2 ml-3 app-title"><i class="fas fa-hand-holding-usd" width="80"
@@ -26,7 +26,7 @@
                 <span aria-hidden="true"></span>
               </a>
             </div>
-            <div id="navbarBasicExample" class="navbar-menu is-align-content-space-evenly">
+            <div id="navbarBasicExample" class="navbar-menu is-align-content-space-evenly mt-2">
               <div class="navbar-end">
                 <a href="./index.html" class="navbar-item is-size-6 has-text-white">
                   <i class="fas fa-chart-line mr-2" aria-hidden="true"></i> Balance
@@ -41,7 +41,7 @@
             </div>
           </nav>
         </header>
-        <section class="section mt-5 vista" id="reports">
+        <section class="section mt-6 vista" id="reports">
             <div class="container">
                 <div class="columns">
                     <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
@@ -60,7 +60,7 @@
                                 <section class="section mb-5" id="summary">
                                     <h4 class="title is-size-4 mb-5 pb-4">Resumen</h4>
                                     <!--  highest earning category -->
-                                    <div class="columns is-mobile">
+                                    <div class="columns is-mobile" id="profit-category">
                                         <div class="column is-6 has-text-weight-semibold">
                                             Categoría con mayor ganancia
                                         </div>
@@ -90,7 +90,8 @@
                                             <span class="tag is-primary is-light" id="category-higher-balance"></span>
                                         </div>
                                         <div class="column is-3 has-text-weight-semibold has-text-right"
-                                            id="amount-category-higher-balance"></div>
+                                            id="amount-category-higher-balance">
+                                        </div>
                                     </div>
                                     <!--  month with the highest profit -->
                                     <div class="columns is-mobile">
@@ -162,4 +163,5 @@
     
 </body>
 <script src="scripts/script.js"></script>
+<script src="scripts/filters.js"></script>
 </html>
