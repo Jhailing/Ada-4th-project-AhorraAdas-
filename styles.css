@@ -19,13 +19,20 @@ html{
 .navbar{
     height: 100px;
 }
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
 .container{
-    margin-top: 100px;
+    margin-top: 50px;
 }
 .navbar-menu{
     background-color: #0a0a0a;
     transition: background-color .7s;
-    margin-bottom: 20px;
+
 }
 a.navbar-item:hover{
     transition: background-color .7s;

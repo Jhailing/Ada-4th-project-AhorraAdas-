@@ -105,3 +105,17 @@ function deleteOperation (e) {
     setStorage(storage);
     showOperations(operations);
 }
+
+
+// const storage = getStorage();
+//     const newCategory = e.target.name.value;
+
+//     if(storage.categories.includes(newCategory)){
+//         nameCategory = "";
+//         return alert('Esta categoria ya existe')
+//     } else if (!storage.categories.includes(nameCategory)) {
+//         const category  = {
+//             id: generatorId(), 
+//             name: categoryInput.value, 
+//         }
+//     }
