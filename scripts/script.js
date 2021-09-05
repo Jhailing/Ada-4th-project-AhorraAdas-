@@ -49,3 +49,9 @@ const today = () => {
   const day = now.getDate().toString().padStart(2, '0');
   return `${now.getFullYear()}-${month}-${day}`;
 }
+
+const getCategoryById = (id) => {
+  const storage = getStorage();
+  const categories = storage.categories.filter(category => category.id === id);
+  return categories[0];
+}
