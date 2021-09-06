@@ -2,11 +2,6 @@ const containerWithOperations = document.getElementById('with-operations');
 const containerNoOperations = document.getElementById('no-operations');
 const operationsList = document.getElementById('list-operations');
 
-document.addEventListener('DOMContentLoaded', ()=> {
-    const storage = getStorage();
-    showOperations(operations);
-})
-
 const showOperations = (operations) =>{
     if(!operations.length){
         containerNoOperations.classList.remove('is-hidden');
@@ -34,7 +29,7 @@ const showOperations = (operations) =>{
         const categorySelected = document.createElement('span');
         categorySelected.classList.add('tag', 'is-primary', 'is-light');
         const category = getCategoryById(op.category);
-        categorySelected.innerHTML = op.category;
+        categorySelected.innerHTML = category.name;
         const cellDate = document.createElement('div');
         cellDate.classList.add('column', 'is-2-tablet', 'has-text-grey', 'is-hidden-mobile', 'has-text-centered-tablet');
         const dateComponent =  op.date.split('-');
@@ -54,7 +49,7 @@ const showOperations = (operations) =>{
         contActionBtns.classList.add('is-fullwidth');
         const editBtn = document.createElement('a');
         editBtn.classList.add('button', 'is-light');
-        editBtn.setAttribute('href', `./edit-operation.html?opId=${op.id}&opDescription=${op.description}&opAmount=${op.amount}&opType=${op.type}&opCategory=${op.category}&opDate=${op.date}`);
+        editBtn.setAttribute('href', `./edit-operation.html?opId=${op.id}`);
         const contIconEdit = document.createElement('span');
         contIconEdit.classList.add('icon', 'is-medium', 'btn-edit-operation');
         contIconEdit.setAttribute('aria-label', 'Editar');
@@ -68,7 +63,7 @@ const showOperations = (operations) =>{
         const iconDelete = document.createElement('i');
         iconDelete.classList.add('far', 'fa-trash-alt');
         contIconDelete.style.pointerEvents = 'none';
-        deleteBtn.addEventListener('click', deleteOperation);
+        deleteBtn.addEventListener('click', onDeleteOperation);
         deleteBtn.dataset.id = op.id;
 
         operationsList.appendChild(itemOperations);
@@ -90,25 +85,8 @@ const showOperations = (operations) =>{
     }
 }
 
-function deleteOperation (e) {
-    let deleteById = e.target.dataset.id;
-    const storage = getStorage();
-    const operations = storage.operations.filter(op => op.id !== deleteById);
-    storage.operations = operations;
-    setStorage(storage);
-    showOperations(operations);
+function onDeleteOperation (e) {
+    let operationId = e.target.dataset.id;
+    deleteOperation(operationId);
+    filtersAll();
 }
-
-
-// const storage = getStorage();
-//     const newCategory = e.target.name.value;
-
-//     if(storage.categories.includes(newCategory)){
-//         nameCategory = "";
-//         return alert('Esta categoria ya existe')
-//     } else if (!storage.categories.includes(nameCategory)) {
-//         const category  = {
-//             id: generatorId(), 
-//             name: categoryInput.value, 
-//         }
-//     }

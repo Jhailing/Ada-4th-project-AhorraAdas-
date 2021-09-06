@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +10,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
   <header>
     <nav class="navbar px-3 is-black" role="navigation" aria-label="main navigation">
@@ -42,7 +40,6 @@
       </div>
     </nav>
   </header>
-
   <body>
     <section class="section mt-5" id="">
       <div class="container">
@@ -52,23 +49,23 @@
               <h2 class="title is-size-3 has-text-weight-bold">Editar categoría</h2>
               <label class="label mt-6" for="">Nombre</label>
               <form action="" id="form">
-              <div class="field is-grouped">
-                <div class="control is-expanded">
-                  <input class="input" type="text" placeholder="Ingrese nueva categoria" id="edit-input-category"
-                    aria-required="true" required autofocus>
+                <div class="field is-grouped">
+                  <div class="control is-expanded">
+                    <input class="input" type="text" placeholder="Ingrese nueva categoria" id="edit-input-category"
+                      aria-required="true" required autofocus>
+                  </div>
                 </div>
-              </div>
-              <div class="buttons mt-6">
-                <button type="submit" class="button" onclick="canceledBtn()"
-                  id="not-save-category-edit-btn">Cancelar</button>
-                <button type="submit" class="button is-dark" id="save-categoy-edit-btn">Guardar</button>
-              </div>
+                <div class="buttons mt-6">
+                  <a href="./categories.html" class="button" id="cancel-add-new-op-btn">Cancelar</a>
+                  <button type="submit" class="button is-dark" id="save-categoy-edit-btn">Guardar</button>
+                </div>
               </form>
             </div>
           </div>
         </div>
       </div>
     </section>
+    <script src="scripts/data-manager.js"></script>
     <script src="scripts/script.js"></script>
     <script src="scripts/edit-category.js"></script>
   </body>
