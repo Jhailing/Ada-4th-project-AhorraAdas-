@@ -7,12 +7,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
     showOperations(operations);
 })
 
-
-const getCategoryById = (id) => {
-    const categories = storage.categories.filter(category => category.id === id);
-    return categories[0];
-}
-
 const showOperations = (operations) =>{
     if(!operations.length){
         containerNoOperations.classList.remove('is-hidden');
