@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +10,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
   <header>
     <nav class="navbar px-3 is-black" role="navigation" aria-label="main navigation">
@@ -48,7 +46,7 @@
         <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
           <div class="box">
             <h2 class="title is-size-2 has-text-weight-bold">Nueva operación</h2>
-            <div id="form-add-new-operation">
+            <form id="form-add-new-operation">
               <div class="field mt-6">
                 <label class="label" for="description-input">Descripción</label>
                 <div class="control">
@@ -95,16 +93,17 @@
                 </div>
               </div>
               <div class="buttons mt-6">
-                <a href="" class="button" id="cancel-add-new-op-btn">Cancelar</a>
-                <button class="button is-dark" id="add-new-op-btn">Agregar</button>
+                <a href="./index.html" class="button" id="cancel-add-new-op-btn">Cancelar</a>
+                <button type="submit" class="button is-dark" id="add-new-op-btn">Agregar</button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </section>
 </body>
+<script src="scripts/data-manager.js"></script>
 <script src="scripts/script.js"></script>
 <script src="scripts/operations.js"></script>
 </html>

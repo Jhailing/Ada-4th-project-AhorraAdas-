@@ -1,52 +1,29 @@
-const notAddNewOperationBtn = document.getElementById('cancel-add-new-op-btn');
-const addNewOperationBtn = document.getElementById('add-new-op-btn');
+const formAddNewOperation = document.getElementById('form-add-new-operation');
 const newOperationName = document.getElementById('description-input');
 const amountNewOperation = document.getElementById('amount-input');
 const selectTypeOperation = document.getElementById('type-operation');
 const selectCategory = document.getElementById('categories-select');
 const dateNewOperation = document.getElementById('date-input');
 
+window.addEventListener('DOMContentLoaded', () =>{
+    loadCategories();
+    restartViewOperation();
+})
+
 const restartViewOperation = () => {
-    newOperationName.value = '';
-    amountNewOperation.value = 0;
     selectTypeOperation.value = 'expense';
     dateNewOperation.value = today();
 }
 
 const loadCategories = () => {
-    const storage = getStorage();
-    const categories = storage.categories;
-    
+    const categories = getAllCateries();
     for(let category of categories){
         selectCategory.innerHTML += `<option value="${category.id}">${category.name}</option>`;
     }
 }
 
-const createNewOperation = (e) => {
-    const date = dateNewOperation.valueAsDate;
-    const newOperation = {
-        id: generatorId(),
-        description: newOperationName.value,
-        amount: amountNewOperation.value,
-        type: selectTypeOperation.value,
-        category: selectCategory.value,
-        date: dateNewOperation.value
-    };
-    const storage = getStorage();
-    storage.operations.push(newOperation);
-    setStorage(storage);
-}
-
-notAddNewOperationBtn.addEventListener('click', () => {
-    notAddNewOperationBtn.setAttribute('href', './index.html');
-});
-
-addNewOperationBtn.addEventListener('click', function(){
-    createNewOperation();
+formAddNewOperation.addEventListener('submit', (e) => {
+    e.preventDefault();
+    newOperation(newOperationName.value, amountNewOperation.value, selectTypeOperation.value, selectCategory.value, dateNewOperation.value);
     window.location.assign("index.html");
-})
-
-window.addEventListener('load', () =>{
-    loadCategories();
-    restartViewOperation();
 })

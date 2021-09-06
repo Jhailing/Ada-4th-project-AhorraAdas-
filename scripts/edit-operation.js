@@ -1,19 +1,19 @@
+const formEditOperation = document.getElementById('form-edit-operation');
 const editDescriptionInput = document.getElementById('edit-description-input');
 const editAmountInput = document.getElementById('edit-amount-input');
 const editTypeInput = document.getElementById('edit-type-operation');
 const editCategorySelect = document.getElementById('edit-categories-select')
 const editDateInput = document.getElementById('edit-date-input');
-const editOperationBtn = document.getElementById('edit-op-btn');
-let idOpParams;
 
-window.addEventListener('load', () =>{
+let operationId;
+
+window.addEventListener('DOMContentLoaded', () =>{
     loadCategories();
     loadOperation();
 })
 
 const loadCategories = () => {
-    const storage = getStorage();
-    const categories = storage.categories;
+    const categories = getAllCateries();
     
     for(let category of categories){
         editCategorySelect.innerHTML += `<option value="${category.id}">${category.name}</option>`;
@@ -22,40 +22,20 @@ const loadCategories = () => {
 
 const loadOperation = () => {
     const params = new URLSearchParams(window.location.search);
-    idOpParams = params.get('opId');
-    const descriptionOpParams = params.get('opDescription');
-    const amountOpParams = params.get('opAmount');
-    const typeOpParams = params.get('opType');
-    const categoryOpParams = params.get('opCategory');
-    const dateOpParams = params.get('opDate');
-    editDescriptionInput.value = descriptionOpParams;
-    editAmountInput.value = amountOpParams;
-    editTypeInput.value = typeOpParams;
-    editCategorySelect.value = categoryOpParams;
-    editDateInput.value = dateOpParams;
+    operationId = params.get('opId');
+    const operation = getOperationById(operationId);
+
+    editDescriptionInput.value = operation.description;
+    editAmountInput.value = operation.amount;
+    editTypeInput.value = operation.type;
+    editCategorySelect.value = operation.category;
+    editDateInput.value = operation.date;
 }
 
-const editOperation = function (e) {
+const editOperation = (e) => {
     e.preventDefault();
-    let showDescription = editDescriptionInput.value;
-    let showAmount = editAmountInput.value;
-    let showType = editTypeInput.value;
-    let showCategory = editCategorySelect.value;
-    let showDate = editDateInput.value;
-    if(showDescription != ""){
-        const storage = getStorage();
-        for (let i = 0; i < storage.operations.length; i++) {
-            if (storage.operations[i].id == idOpParams) {
-                storage.operations[i].description = showDescription;
-                storage.operations[i].amount = showAmount;
-                storage.operations[i].type = showType;
-                storage.operations[i].category = showCategory;
-                storage.operations[i].date = showDate;
-                break;
-            }
-        }
-        setStorage(storage);
-    }
+    updateOperation(operationId, editDescriptionInput.value, editAmountInput.value, editTypeInput.value, editCategorySelect.value, editDateInput.value);
     window.location.assign("./index.html");
 }
-editOperationBtn.addEventListener('click', editOperation);
+
+formEditOperation.addEventListener('submit', editOperation);

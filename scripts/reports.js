@@ -14,188 +14,45 @@ const highestExpenseMonthAmountSpan = document.getElementById('highest-expense-m
 const totalsByCategoriesDiv = document.getElementById('totals-by-categories');
 const totalsByMonthDiv = document.getElementById('totals-by-month');
 
-window.addEventListener('load', () =>{
+window.addEventListener('DOMContentLoaded', () =>{
     loadReport();
     totalsByCategory();
     totalsByMonth();
 })
 
-const getProfitCategories = () => {
-    const storage = getStorage();
-    var profitCategories = {};
-    for(let op of storage.operations){
-        if(op.type === 'profit'){
-            const value = profitCategories[op.category];
-            if(value === undefined){
-                profitCategories[op.category] = parseFloat(op.amount);
-            }else{
-                profitCategories[op.category] += parseFloat(op.amount);
-            }
-        }
-    }
-    return profitCategories
-}
-
-const getExpenseCategories = () => {
-    const storage = getStorage();
-    var expenseCategories = {};
-    for(let op of storage.operations){
-        if(op.type === 'expense'){
-            const value = expenseCategories[op.category];
-            if(value === undefined){
-                expenseCategories[op.category] = parseFloat(op.amount);
-            }else{
-                expenseCategories[op.category] += parseFloat(op.amount);
-            }
-        }   
-    }
-    return expenseCategories;
-}
-
-const getBalanceCategories = () =>{
-    const storage = getStorage();
-    var balanceCategories = {};
-    for(let op of storage.operations){
-        let balanceCategoryValue = balanceCategories[op.category];
-        if (balanceCategoryValue == undefined){
-            balanceCategoryValue = 0;
-        }
-        if(op.type === 'profit'){
-            balanceCategoryValue += parseFloat(op.amount);            
-        }else{
-            balanceCategoryValue -= parseFloat(op.amount);
-        }
-        balanceCategories[op.category] = balanceCategoryValue;
-    }
-    return balanceCategories;
-}
-
-const getProfitMonths = () =>{
-    const storage = getStorage();
-    var profitMonth = {};
-    for(let op of storage.operations){
-        if(op.type === 'profit'){
-            const month = op.date.substring(0, 7);
-            const valueMonth = profitMonth[month];
-            if(valueMonth === undefined){
-                profitMonth[month] = parseFloat(op.amount);
-            }else{
-                profitMonth[month] += parseFloat(op.amount);
-            }
-        }
-    }
-    return profitMonth;
-}
-
-const getExpenseMonths = () =>{
-    const storage = getStorage();
-    var expenseMonth = {};
-    for(let op of storage.operations){
-        if(op.type === 'expense'){
-            const month = op.date.substring(0, 7);
-            const valueMonth = expenseMonth[month];
-            if(valueMonth === undefined){
-                expenseMonth[month] = parseFloat(op.amount);
-            }else{
-                expenseMonth[month] += parseFloat(op.amount);
-            }
-        }
-    }
-    return expenseMonth;
-}
-
-const getOperationMonths = () => {
-    const storage = getStorage();
-    var months = [];
-    for(let op of storage.operations){
-        const month = op.date.substring(0, 7);
-        if(!months.includes(month)){
-            months.push(month);
-        }
-    }
-    return months;
-}
-
 const loadReport = () => {
-    const storage = getStorage();
-    var profitCategories = getProfitCategories();
-    var expenseCategories = getExpenseCategories();
-    var balanceCategories = getBalanceCategories();
-    var profitMonth = getProfitMonths();
-    var expenseMonth = getExpenseMonths();
-
-    if(Object.keys(profitCategories).length > 0 && Object.keys(expenseCategories).length > 0){
+    const report = getReport();
+    if(report.highestProfitCategoryId != undefined && report.highestExpenseCategoryId != undefined){
         sectionWithReports.classList.remove('is-hidden');
         sectionNoReports.classList.add('is-hidden');
     }else{
         return;
     }
     
-    let highestProfitCategoryId;
-    let highestProfitCategoryAmount = 0;
-    for(const key in profitCategories){
-        const profitCategoryAmount = profitCategories[key];
-        if(profitCategoryAmount > highestProfitCategoryAmount){
-            highestProfitCategoryId = key;
-            highestProfitCategoryAmount = profitCategoryAmount;
-        }
-    }
-
-    let highestExpenseCategoryId;
-    let highestExpenseCategoryAmount = 0;
-    for(const key in expenseCategories){
-        const expenseCategoryAmount = expenseCategories[key];
-        if(expenseCategoryAmount > highestExpenseCategoryAmount){
-            highestExpenseCategoryId = key;
-            highestExpenseCategoryAmount = expenseCategoryAmount;
-        }
-    }
-
-    let highestBalanceCategoryId;
-    let highestBalanceCategoryAmount;
-    for(const key in balanceCategories){
-        const balanceCategoryAmount = balanceCategories[key];
-        if(balanceCategoryAmount > highestBalanceCategoryAmount || highestBalanceCategoryAmount == undefined){
-
-            highestBalanceCategoryId = key;
-            highestBalanceCategoryAmount = balanceCategoryAmount;
-        }
-    }
-
-    let highestProfitByMonth;
-    let highestProfitAmountByMonth = 0;
-    for(const key in profitMonth){
-        const profitAmountByMonth = profitMonth[key];
-        if(profitAmountByMonth > highestProfitAmountByMonth){
-            highestProfitByMonth = key;
-            highestProfitAmountByMonth = profitAmountByMonth;
-        }
-    }
-
-    let highestExpenseByMonth;
-    let highestExpenseAmountByMonth = 0;
-    for(const key in expenseMonth){
-        const expenseAmountByMonth = expenseMonth[key];
-        if(expenseAmountByMonth > highestExpenseAmountByMonth){
-            highestExpenseByMonth = key;
-            highestExpenseAmountByMonth = expenseAmountByMonth;
-        }
-    }
-
-    highestProfitCategorySpan.innerHTML = getCategoryById(highestProfitCategoryId).name;
-    highestProfitCategoryAmountSpan.innerHTML = `+$ ${highestProfitCategoryAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-    highestExpenseCategorySpan.innerHTML = getCategoryById(highestExpenseCategoryId).name;
-    highestExpenseCategoryAmountSpan.innerHTML = `-$ ${highestExpenseCategoryAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-    highestBalanceCategorySpan.innerHTML = getCategoryById(highestBalanceCategoryId).name;
-    if(highestBalanceCategoryAmount < 0){
-        highestBalanceCategoryAmountSpan.innerHTML = `-$ ${(highestBalanceCategoryAmount * -1).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    highestProfitCategorySpan.innerHTML = report.highestProfitCategoryName;
+    highestProfitCategoryAmountSpan.innerHTML = `+$ ${report.highestProfitCategoryAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    highestExpenseCategorySpan.innerHTML = report.highestExpenseCategoryName;
+    highestExpenseCategoryAmountSpan.innerHTML = `-$ ${report.highestExpenseCategoryAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    highestBalanceCategorySpan.innerHTML = report.highestBalanceCategoryName;
+    if(report.highestBalanceCategoryAmount < 0){
+        highestBalanceCategoryAmountSpan.innerHTML = `-$ ${(report.highestBalanceCategoryAmount * -1).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
     }else{
-        highestBalanceCategoryAmountSpan.innerHTML = `+$ ${highestBalanceCategoryAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        highestBalanceCategoryAmountSpan.innerHTML = `+$ ${report.highestBalanceCategoryAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
     }
-    highestProfitMonthSpan.innerHTML = highestProfitByMonth;
-    highestProfitMonthAmountSpan.innerHTML = `+$ ${highestProfitAmountByMonth.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-    highestExpenseMonthSpan.innerHTML = highestExpenseByMonth;
-    highestExpenseMonthAmountSpan.innerHTML = `-$ ${highestExpenseAmountByMonth.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    highestProfitMonthSpan.innerHTML = report.highestProfitByMonth;
+    highestProfitMonthAmountSpan.innerHTML = `+$ ${report.highestProfitAmountByMonth.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    highestExpenseMonthSpan.innerHTML = report.highestExpenseByMonth;
+    highestExpenseMonthAmountSpan.innerHTML = `-$ ${report.highestExpenseAmountByMonth.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+    for(const totalCategory of report.totalCategories){
+        const row = buildTotalRow(totalCategory.name, totalCategory.profit, totalCategory.expense, totalCategory.balance);
+        totalsByCategoriesDiv.appendChild(row);
+    }
+
+    for(const totalMonth of report.totalMonths){
+        const row = buildTotalRow(totalMonth.month, totalMonth.profit, totalMonth.expense, totalMonth.balance);
+        totalsByMonthDiv.appendChild(row);
+    }
 }
 
 const buildTotalRow = (description, profit, expense, balance) =>{
@@ -226,35 +83,4 @@ const buildTotalRow = (description, profit, expense, balance) =>{
         cellBalance.innerHTML = `+$ ${balance.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
     }
     return row;
-}
-
-const totalsByCategory = () =>{
-    const storage = getStorage();
-    var profitCategories = getProfitCategories();
-    var expenseCategories = getExpenseCategories();
-    for(let cat of storage.categories){
-        if(profitCategories[cat.id] != undefined || expenseCategories[cat.id] != undefined){
-            const catName = getCategoryById(cat.id).name;
-            const profit = profitCategories[cat.id] == undefined ? 0 : profitCategories[cat.id];
-            const expense = expenseCategories[cat.id] == undefined ? 0 : expenseCategories[cat.id];
-            const balance = parseFloat(profit) - parseFloat(expense);
-            const row = buildTotalRow(catName, profit, expense, balance);
-
-            totalsByCategoriesDiv.appendChild(row);
-        }
-    }
-}
-
-const totalsByMonth = () =>{
-    const profitMonth = getProfitMonths();
-    const expenseMonth = getExpenseMonths();
-    const months = getOperationMonths();
-    for(const month of months){
-        const profit = profitMonth[month] == undefined ? 0 : profitMonth[month];
-        const expense = expenseMonth[month] == undefined ? 0 : expenseMonth[month];
-        const balance = parseFloat(profit) - parseFloat(expense);
-        const row = buildTotalRow(month, profit, expense, balance);
-        
-        totalsByMonthDiv.appendChild(row);
-    }
 }
