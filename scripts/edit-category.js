@@ -1,5 +1,5 @@
 const editInputCategory = document.getElementById('edit-input-category');
-const formChangeCategory = document.getElementById('form');
+const formEditCategory = document.getElementById('form-edit-category');
 
 let categoryId;
    
@@ -18,11 +18,11 @@ const saveCategory = function (e) {
     let categoryName = editInputCategory.value;
     const category =  getCategoryByName(categoryName)
     if(category != undefined && category.id != categoryId){
-        alert('Ups, la categoría ya existe!');
+        Swal.fire('Ups! La categoría ya exite');
     }else{
         updateCategoy(categoryId, categoryName);
         window.location.assign("./categories.html");    
     }
 }
 
-formChangeCategory.addEventListener('submit', saveCategory);
+formEditCategory.addEventListener('submit', saveCategory);
