@@ -39,6 +39,15 @@ const today = () => {
     const day = now.getDate().toString().padStart(2, '0');
     return `${now.getFullYear()}-${month}-${day}`;
 }
+
+
+const saveFilterDate = (value) =>{
+    localStorage.setItem('filterDate', value);
+}
+
+const getFilterDate = () =>{
+    return localStorage.getItem('filterDate');
+}
   
 // Categories
 const getCategoryById = (id) => {
@@ -78,6 +87,12 @@ const updateCategoy = (id, name) => {
 const deleteCategory = (id) => {
     const storage = getStorage();
     const categories = storage.categories.filter(category => category.id !== id);
+    const operationsToDelete = getOperationByCategoryId(id);
+    let operations = getAllOperations();
+    for(operation of operationsToDelete){
+        operations = operations.filter(op => op.id !== operation.id);
+    }
+    storage.operations = operations;
     storage.categories= categories;
     setStorage(storage);
 }
@@ -92,6 +107,12 @@ const getOperationById = (id) => {
 const getAllOperations = () => {
     const storage = getStorage();
     return storage.operations;
+}
+
+const getOperationByCategoryId = (categoryId) => {
+    const storage = getStorage();
+    const operations = storage.operations.filter(operation => operation.category === categoryId);
+    return operations;
 }
 
 const getFilteredOperations = (type, categoryId, fromDate, sortBy) => {
@@ -119,11 +140,11 @@ const getFilteredOperations = (type, categoryId, fromDate, sortBy) => {
 const sortOperations = (operations, sortBy) => {
     switch(sortBy){
         case 'more-recent':
-            return operations.sort((a,b) => (Date.parse(a.date) < Date.parse(b.date)) ? 1 : ((Date.parse(b.date) < Date.parse(a.date)) ? -1 : 0));
+            return operations.sort((a, b) => (Date.parse(a.date) < Date.parse(b.date)) ? 1 : ((Date.parse(b.date) < Date.parse(a.date)) ? -1 : 0));
         case 'less-recent':
             return operations.sort((a,b) => (Date.parse(a.date) > Date.parse(b.date)) ? 1 : ((Date.parse(b.date) > Date.parse(a.date)) ? -1 : 0));
         case 'greater-amount':
-            return operations.sort((a,b) => {
+            return operations.sort((a, b) => {
                 const aAmount = a.type === 'expense' ? a.amount * -1 : a.amount; 
                 const bAmount = b.type === 'expense' ? b.amount * -1 : b.amount; 
                 if(parseFloat(aAmount) < parseFloat(bAmount)){
@@ -135,7 +156,7 @@ const sortOperations = (operations, sortBy) => {
                 }
             });
         case 'lower-amount':
-            return operations.sort((a,b) => {
+            return operations.sort((a, b) => {
                 const aAmount = a.type === 'expense' ? a.amount * -1 : a.amount; 
                 const bAmount = b.type === 'expense' ? b.amount * -1 : b.amount; 
                 if(parseFloat(aAmount) > parseFloat(bAmount)){
@@ -147,9 +168,9 @@ const sortOperations = (operations, sortBy) => {
                 }
             });
         case 'A/Z':
-            return operations.sort((a,b) => (a.description > b.description) ? 1 : ((b.description > a.description) ? -1 : 0));
+            return operations.sort((a, b) => (a.description > b.description) ? 1 : ((b.description > a.description) ? -1 : 0));
         case 'Z/A':
-            return operations.sort((a,b) => (a.description < b.description) ? 1 : ((b.description < a.description) ? -1 : 0));
+            return operations.sort((a, b) => (a.description < b.description) ? 1 : ((b.description < a.description) ? -1 : 0));
     }
 };
 

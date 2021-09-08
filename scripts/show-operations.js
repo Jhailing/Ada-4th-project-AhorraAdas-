@@ -38,10 +38,10 @@ const showOperations = (operations) =>{
         cellAmount.classList.add('column', 'is-2-tablet', 'is-6-mobile', 'has-text-weight-bold', 'has-text-right-tablet', 'is-size-4-mobile');
         if(op.type === 'expense'){
             cellAmount.classList.add('has-text-danger');
-            cellAmount.innerHTML = `-$ ${op.amount}`;
+            cellAmount.innerHTML = `-$ ${op.amount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
         } else{
             cellAmount.classList.add('has-text-success');
-            cellAmount.innerHTML = `+$ ${op.amount}`;
+            cellAmount.innerHTML = `+$ ${op.amount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
         }
         const cellActionsBtns = document.createElement('div');
         cellActionsBtns.classList.add('column', 'is-2-tablet', 'is-6-mobile', 'has-text-right');

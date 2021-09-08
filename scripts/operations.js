@@ -24,6 +24,29 @@ const loadCategories = () => {
 
 formAddNewOperation.addEventListener('submit', (e) => {
     e.preventDefault();
-    newOperation(newOperationName.value, amountNewOperation.value, selectTypeOperation.value, selectCategory.value, dateNewOperation.value);
-    window.location.assign("index.html");
+    if(amountNewOperation.value == 0 || amountNewOperation.value == ''){
+        amountNewOperation.focus();
+        Swal.fire('Ups! La operación no tiene monto');
+    }else{
+        newOperation(newOperationName.value, amountNewOperation.value, selectTypeOperation.value, selectCategory.value, dateNewOperation.value);
+        window.location.assign("index.html");
+    }
+})
+
+amountNewOperation.addEventListener('focusin', (e) => {
+    if(amountNewOperation.value == 0){
+        amountNewOperation.value = '';
+    }
+})
+
+amountNewOperation.addEventListener('focusout', (e) => {
+    if(amountNewOperation.value == ''){
+        amountNewOperation.value = 0;
+    }
+})
+
+document.addEventListener('keydown', (e) => {
+    if(amountNewOperation.value == '' && e.code == 'Digit0'){
+        e.preventDefault();
+    }
 })
